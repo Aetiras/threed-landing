@@ -1,0 +1,16 @@
+sheet S1 A3 iso {
+  v1 = view(front, scale: 1:1, at: (185, 195))
+  v2 = view(top, parent: v1, at: (185, 85))
+  v3 = view(right, parent: v1, at: (70, 195))
+  v4 = view(iso, scale: 1:1, at: (330, 185))
+  d1 = dim(v1, edge("govde/cap_end|govde/side/E12"), edge("govde/cap_end|govde/side/E8"), orient: horizontal)
+  d2 = dim(v1, edge("govde/cap_end|govde/side/E7"), edge("govde/cap_end|govde/side/E11"), orient: vertical)
+  d3 = dim(v1, edge("govde/cap_end|govde/side/E7"), edge("govde/cap_end|govde/side/E9"), orient: vertical)
+  d4 = dim(v1, edge("govde/cap_end|govde/side/E12"), edge("govde/cap_end|govde/side/E10"), orient: horizontal)
+  d5 = dim(v3, edge("govde/side/E12|mil_delik/side/E2"), kind: diameter, tol: "H7")
+  d6 = dim(v2, edge("baglanti/h1/wall1|govde/side/E9"), kind: diameter)
+  d7 = dim(v2, edge("baglanti/h1/wall1|govde/side/E9"), edge("baglanti/h3/wall1|govde/side/E9"), a: center, b: center, orient: horizontal)
+  d8 = dim(v2, edge("baglanti/h1/wall1|govde/side/E9"), edge("baglanti/h2/wall1|govde/side/E9"), a: center, b: center, orient: vertical)
+  note("Genel toleranslar ISO 2768-m · Keskin kenarları kırın", at: (20, 20))
+  title(name: "Motor braketi", material: "S235JR", drawn_by: "threeD")
+}

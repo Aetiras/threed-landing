@@ -2,17 +2,20 @@
 
 **Canlı:** https://aetiras.github.io/threed-landing/
 
-threeD, SolidWorks tarzı özellik ağacını, teknik resmi ve Codex tabanlı yapay zekâ asistanını tek bir yerel masaüstü uygulamasında birleştiren parametrik mekanik CAD'dir (Rust · Open CASCADE · egui/wgpu). Bu depo, projeyi anlatan animasyonlu tanıtım sayfasıdır.
+threeD, bilgisayarında çalışan parametrik bir mekanik CAD'dir: özellik ağacı, kısıtlı sketch, montaj ve teknik resim; istenirse parçayı tarif edip ağaca ekleyen bir yapay zekâ asistanı. Bu depo, ürünü anlatan tanıtım sayfasıdır.
 
 ## Sayfada neler var
 
-- **Hero:** Three.js ile gerçek zamanlı çizilen bir braket — sketch çizilir, extrude ile yükselir, önizleme yeşilinden metale döner, kenarları seçilir. Yanındaki asistan kartı adımları eşzamanlı işaretler.
-- **Özellikler:** özellik ağacı, kısıt çözücü, teknik resim, montaj, dosya alışverişi (bento ızgara, eğim ve spot ışık efektleri).
-- **Asistan:** uygulamadaki sohbet tasarımının canlı demosu — adım özeti, sonuç kartı, hızlı yanıt seçenekleri.
-- **DSL:** threeD betiği yazılırken sözdizimi renklendirmesiyle akar.
-- **Mimari:** 13 crate'lik yapının akan bağlantılı diyagramı.
+Sayfa tek bir gerçek örnekle ilerler: threeD'de kurulmuş bir motor braketi. Görsellerin ve dosyaların hepsi aynı threeD belgesinden dışa aktarıldı.
 
-`prefers-reduced-motion` açık olduğunda animasyonlar kapanır ve son durum gösterilir.
+- **Hero:** braketin döndürülebilir 3B modeli ve özellikleri (malzeme, kütle, yüz sayısı).
+- **Nasıl çalışır:** video gibi oynayan, sarılabilen bir oynatıcı. "Asistanla" modunda istek yazılır, model yeşil önizleme olarak adım adım oluşur (ağaç ve sohbet eşzamanlı), "Uygula" ile metale döner. "Elle" modunda aynı adımlar kısayollarıyla anlatılır.
+- **Asistan:** önizleme, tek geri alma, isteğe bağlılık, MCP.
+- **Montaj:** yerine inen ISO cıvata ve pullar, malzeme listesi.
+- **Teknik resim:** threeD'nin DXF çıktısından çizilen pafta (katmanlar açılıp kapanır) ve indirilebilir PDF/DXF/STEP/STL.
+- **Durum, SSS, erken erişim (yakında).**
+
+Açık/koyu tema (sistem tercihi ya da düğme). `prefers-reduced-motion` açıkken animasyonlar kapanır.
 
 ## Geliştirme
 
@@ -22,10 +25,12 @@ npm run dev      # http://localhost:5173
 npm run build    # dist/
 ```
 
+Varlıkları client'tan yeniden üretmek için: `scripts/uret.py` (ayrıntı `CLAUDE.md`'de).
+
 ## Yayın
 
 `main` dalına her gönderimde GitHub Actions (`.github/workflows/pages.yml`) siteyi derleyip GitHub Pages'e yayınlar. Proje sayfası `/threed-landing/` alt yolunda sunulduğu için derleme `PAGES_BASE` ortam değişkeniyle yapılır; Vercel veya başka bir kök alan adında değişken verilmeden derlenir (`vercel.json` hazır).
 
 ## Teknoloji
 
-Vite · Three.js · saf CSS animasyonları · Geist yazı ailesi.
+Vite · Three.js · saf CSS · Instrument Sans + IBM Plex Mono.
