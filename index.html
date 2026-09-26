@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>threeD — Yapay zekâ destekli parametrik CAD</title>
+  <meta name="description" content="threeD: SolidWorks tarzı özellik ağacı, teknik resim ve Codex tabanlı AI asistanını tek bir yerel masaüstü uygulamasında birleştiren parametrik mekanik CAD. Rust · Open CASCADE · wgpu." />
+  <meta name="theme-color" content="#0a0c0b" />
+  <meta property="og:title" content="threeD — Konuş. Tasarla. Üret." />
+  <meta property="og:description" content="Yapay zekâ destekli parametrik mekanik CAD. Tek cümleyle parça, tek tıkla teknik resim." />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <header class="nav" id="nav">
+    <a class="brand" href="#top" aria-label="threeD ana sayfa">
+      <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true"><polygon points="24,6 40,15 24,24 8,15" fill="#12B76A"/><polygon points="8,15 24,24 24,42 8,33" fill="#0B7C49"/><polygon points="24,24 40,15 40,33 24,42" fill="#7DCBA3"/></svg>
+      <span>three<b>D</b></span>
+    </a>
+    <nav class="nav-links" aria-label="Bölümler">
+      <a href="#ozellikler">Özellikler</a>
+      <a href="#asistan">Asistan</a>
+      <a href="#dsl">DSL</a>
+      <a href="#mimari">Mimari</a>
+    </nav>
+    <a class="btn btn-ghost nav-cta" href="https://github.com/Aetiras/threed-landing" target="_blank" rel="noopener">GitHub
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+    </a>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="grid-floor"></div>
+        <div class="orb orb-a"></div>
+        <div class="orb orb-b"></div>
+      </div>
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <div class="pill reveal"><span class="dot"></span> Rust · Open CASCADE · wgpu · Codex</div>
+          <h1 class="hero-title">
+            <span class="line"><span class="word">Konuş.</span></span>
+            <span class="line"><span class="word">Tasarla.</span></span>
+            <span class="line"><span class="word accent">Üret.</span></span>
+          </h1>
+          <p class="hero-sub reveal">threeD, <strong>SolidWorks tarzı özellik ağacını</strong>, teknik resmi ve yapay zekâ asistanını tek bir yerel masaüstü uygulamasında birleştirir. Parçayı cümleyle tarif et; asistan modeli tek atomik adımda kursun, sen her zaman tek tıkla geri al.</p>
+          <div class="hero-ctas reveal">
+            <a class="btn btn-primary magnetic" href="#asistan">Asistanı gör
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="btn btn-ghost magnetic" href="#dsl">DSL'e göz at</a>
+          </div>
+          <dl class="hero-stats reveal">
+            <div><dt data-count="13">0</dt><dd>Rust crate</dd></div>
+            <div><dt data-count="8">0</dt><dd>MCP aracı</dd></div>
+            <div><dt data-count="131">0</dt><dd>otomatik test</dd></div>
+          </dl>
+        </div>
+
+        <div class="hero-stage">
+          <div class="stage-frame">
+            <div class="stage-bar">
+              <span class="traffic"><i></i><i></i><i></i></span>
+              <span class="stage-title">braket.3d</span>
+              <span class="stage-seg"><b>Parça</b><span>Montaj</span><span>Teknik Resim</span></span>
+            </div>
+            <canvas id="hero3d" aria-label="Sketch'ten çekilen bir parçanın 3B animasyonu"></canvas>
+            <div class="stage-dims" id="stageDims">80 × 40 × 10 mm</div>
+            <div class="stage-chat" id="stageChat">
+              <div class="sc-user">80×40×10 plaka, köşeler R5, iki Ø6.6 delik</div>
+              <div class="sc-steps">
+                <div class="sc-step" data-step="0"><span class="sc-ico"></span>Model okundu</div>
+                <div class="sc-step" data-step="1"><span class="sc-ico"></span>Sketch çizildi</div>
+                <div class="sc-step" data-step="2"><span class="sc-ico"></span>Önizleme hazırlandı</div>
+                <div class="sc-step" data-step="3"><span class="sc-ico"></span>Değişiklik uygulandı</div>
+              </div>
+              <div class="sc-result" id="scResult"><span class="ok"></span><b>3 özellik eklendi</b><em>rev 4</em></div>
+            </div>
+            <div class="stage-dock" aria-hidden="true">
+              <i class="on"></i><i></i><i></i><i></i><span></span><i></i><i></i><i></i><span></span><i></i><i></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="scroll-hint" href="#ozellikler" aria-label="Aşağı kaydır"><span></span></a>
+    </section>
+
+    <!-- MARQUEE -->
+    <section class="marquee" aria-label="Yetenekler">
+      <div class="marquee-track">
+        <span>Extrude</span><span>Revolve</span><span>Fillet</span><span>Chamfer</span><span>Delik · havşa</span><span>Doğrusal çoğaltma</span><span>Dairesel çoğaltma</span><span>Kısıt çözücü</span><span>HLR teknik resim</span><span>Kesit</span><span>PDF · DXF</span><span>STEP · STL · IGES</span><span>Montaj · mate</span><span>ISO standart parçalar</span>
+        <span>Extrude</span><span>Revolve</span><span>Fillet</span><span>Chamfer</span><span>Delik · havşa</span><span>Doğrusal çoğaltma</span><span>Dairesel çoğaltma</span><span>Kısıt çözücü</span><span>HLR teknik resim</span><span>Kesit</span><span>PDF · DXF</span><span>STEP · STL · IGES</span><span>Montaj · mate</span><span>ISO standart parçalar</span>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="section" id="ozellikler">
+      <div class="section-head reveal">
+        <span class="eyebrow">Özellikler</span>
+        <h2>Gerçek bir mekanik CAD.<br /><span class="muted">Üstüne bir asistan.</span></h2>
+      </div>
+      <div class="bento">
+        <article class="card card-lg tilt reveal">
+          <div class="card-visual tree-visual" aria-hidden="true">
+            <div class="tv-row"><i class="tv-ico plane"></i>Üst · Ön · Sağ düzlem</div>
+            <div class="tv-row"><i class="tv-ico sketch"></i>Sketch1 <em>tam tanımlı</em></div>
+            <div class="tv-row sel"><i class="tv-ico cube"></i>Extrude1 <em>10 mm</em></div>
+            <div class="tv-row"><i class="tv-ico fillet"></i>Fillet1 <span class="ai">AI</span></div>
+            <div class="tv-row"><i class="tv-ico hole"></i>Delik1 <span class="ai">AI</span></div>
+            <div class="tv-rollback"></div>
+          </div>
+          <h3>Geçmiş tabanlı özellik ağacı</h3>
+          <p>Sketch, Extrude, Revolve, Fillet, Chamfer, Delik ve çoğaltmalar. Her değer bir ifade: <code>genislik/2</code> yaz, parametreyi değiştir, model yeniden hesaplansın. Geri sarma çubuğu ve topolojik isimlendirme dahil.</p>
+        </article>
+        <article class="card tilt reveal">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M4 20l4-1 11-11-3-3L5 16l-1 4zM14 6l3 3"/></svg></div>
+          <h3>2B kısıt çözücü</h3>
+          <p>SVD tabanlı Gauss–Newton. Yatay, dikey, paralel, teğet, eşit, simetrik… Serbestlik derecesi canlı: tam, eksik ya da aşırı tanımlı.</p>
+        </article>
+        <article class="card tilt reveal">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h6M9 17h4"/></svg></div>
+          <h3>Teknik resim</h3>
+          <p>OCCT HLR ile ön, üst, sağ ve izometrik görünüşler; kesit, tarama, ölçü ve antet. Sürücü ölçüye çift tıkla, model güncellensin. PDF ve DXF çıktısı.</p>
+        </article>
+        <article class="card tilt reveal">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM12 12l8-4.5M12 12L4 7.5M12 12v9"/></svg></div>
+          <h3>Montaj ve standart parçalar</h3>
+          <p>Tek belgede çok parça. Çakışık, eş merkezli, mesafe, açı mate'leri. <code>fasten()</code> ile ISO 4762 cıvata, pul ve somunu deliğe tek satırda yerleştir.</p>
+        </article>
+        <article class="card tilt reveal">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M12 15V3M7 8l5-5 5 5M5 14v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/></svg></div>
+          <h3>Dosya alışverişi</h3>
+          <p>STEP ve IGES içe aktar, STEP ve STL dışa aktar. SQLite tabanlı belge; her değişiklik anında dosyaya işlenir.</p>
+        </article>
+        <article class="card card-wide tilt reveal">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></div>
+          <h3>Yerel hız, tipli güvence</h3>
+          <p>Rust ile yazıldı; geometri çekirdeği Open CASCADE, görüntü alanı wgpu. Tek writer motor, revizyon kontrolü, tekrar gönderim güvenliği ve iş grubu bazında geri alma. Bulut yok, bekleme yok.</p>
+          <div class="speed-bars" aria-hidden="true"><i style="--w:92%"></i><i style="--w:74%"></i><i style="--w:58%"></i></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ASSISTANT -->
+    <section class="section section-split" id="asistan">
+      <div class="split-copy reveal">
+        <span class="eyebrow">AI asistan</span>
+        <h2>Cümleyle başla,<br /><span class="muted">modelde bitir.</span></h2>
+        <p>Asistan Codex üzerinde çalışır ve threeD'ye standart bir MCP sunucusuyla bağlanır. Modeli okur, önizler, tek atomik işlemle uygular. Her iş tek geri alma adımıdır.</p>
+        <ul class="checks">
+          <li>Araç adımları tek satırlık özete katlanır</li>
+          <li>Eklenen özellikler sonuç kartında: geri al ya da modelde göster</li>
+          <li>Asistan soru sorarsa seçenekler tıklanabilir yanıt olur</li>
+          <li>Seçtiğin yüz ve kenarlar mesaja otomatik eklenir</li>
+        </ul>
+      </div>
+      <div class="chat-demo reveal" id="chatDemo" aria-label="Asistan sohbet örneği">
+        <div class="cd-head">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><polygon points="24,6 40,15 24,24 8,15" fill="#12B76A"/><polygon points="8,15 24,24 24,42 8,33" fill="#0B7C49"/><polygon points="24,24 40,15 40,33 24,42" fill="#7DCBA3"/></svg>
+          <b>Plaka ve delikler</b><span class="live"></span>
+        </div>
+        <div class="cd-body" id="cdBody"></div>
+        <div class="cd-input">
+          <span class="cd-chip"><i></i>2 kenar</span>
+          <span class="cd-placeholder" id="cdTyping">threeD'ye ne yapmasını istersiniz?</span>
+          <span class="cd-send"><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- DSL -->
+    <section class="section section-split reverse" id="dsl">
+      <div class="split-copy reveal">
+        <span class="eyebrow">DSL</span>
+        <h2>Bütün parça,<br /><span class="muted">tek betik.</span></h2>
+        <p>Özellik ağacının iki yönlü bir metin karşılığı var. Asistan parçayı tek araç çağrısında kurar; sen aynı betiği okuyup düzenleyebilirsin. Seçiciler geometriye anlamıyla bağlanır: <code>b.edges("|Z")</code>, <code>b.face("&gt;Z")</code>.</p>
+        <div class="dsl-tags">
+          <span>param</span><span>sketch</span><span>extrude</span><span>revolve</span><span>fillet</span><span>hole</span><span>pattern</span><span>sheet</span><span>assembly</span>
+        </div>
+      </div>
+      <div class="code-card reveal" aria-label="threeD DSL örneği">
+        <div class="code-head"><span class="traffic"><i></i><i></i><i></i></span><span>braket.3d · DSL</span><span class="run" id="runBadge">çalıştırılıyor…</span></div>
+        <pre class="code" id="codeBlock"></pre>
+      </div>
+    </section>
+
+    <!-- ARCHITECTURE -->
+    <section class="section" id="mimari">
+      <div class="section-head reveal">
+        <span class="eyebrow">Mimari</span>
+        <h2>Modüler monolit,<br /><span class="muted">13 crate.</span></h2>
+      </div>
+      <div class="arch reveal">
+        <svg class="arch-svg" viewBox="0 0 1000 420" role="img" aria-label="threeD crate mimarisi: uygulama, motor, yeniden hesaplama, çekirdek ve AI katmanları">
+          <defs>
+            <linearGradient id="flow" x1="0" x2="1"><stop offset="0" stop-color="#12B76A" stop-opacity="0"/><stop offset=".5" stop-color="#12B76A"/><stop offset="1" stop-color="#12B76A" stop-opacity="0"/></linearGradient>
+          </defs>
+          <g class="arch-links">
+            <path d="M500 70 C500 110 250 110 250 150"/><path d="M500 70 V150"/><path d="M500 70 C500 110 750 110 750 150"/>
+            <path d="M500 190 C500 230 380 230 380 270"/><path d="M500 190 C500 230 620 230 620 270"/>
+            <path d="M750 190 C750 230 840 230 840 270"/>
+            <path d="M290 290 H250"/>
+            <path d="M380 310 C380 340 500 340 500 370"/>
+          </g>
+          <g class="arch-nodes">
+            <g class="node app" transform="translate(410 30)"><rect width="180" height="40" rx="12"/><text x="90" y="25">threed-app</text></g>
+            <g class="node" transform="translate(160 150)"><rect width="180" height="40" rx="12"/><text x="90" y="25">threed-render</text></g>
+            <g class="node" transform="translate(410 150)"><rect width="180" height="40" rx="12"/><text x="90" y="25">threed-engine</text></g>
+            <g class="node ai" transform="translate(660 150)"><rect width="180" height="40" rx="12"/><text x="90" y="25">threed-agent</text></g>
+            <g class="node" transform="translate(70 270)"><rect width="180" height="40" rx="12"/><text x="90" y="25">threed-sketch</text></g>
+            <g class="node" transform="translate(290 270)"><rect width="180" height="40" rx="12"/><text x="90" y="25">threed-regen</text></g>
+            <g class="node" transform="translate(530 270)"><rect width="180" height="40" rx="12"/><text x="90" y="25">threed-dsl</text></g>
+            <g class="node ai" transform="translate(750 270)"><rect width="180" height="40" rx="12"/><text x="90" y="25">threed-mcp</text></g>
+            <g class="node core" transform="translate(380 370)"><rect width="240" height="40" rx="12"/><text x="120" y="25">threed-kernel · OCCT</text></g>
+          </g>
+        </svg>
+        <div class="arch-legend">
+          <span><i class="lg app"></i>Arayüz · egui + wgpu</span>
+          <span><i class="lg"></i>Belge · regen · DSL</span>
+          <span><i class="lg ai"></i>AI · Codex + MCP</span>
+          <span><i class="lg core"></i>Geometri çekirdeği</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta reveal">
+      <div class="cta-glow" aria-hidden="true"></div>
+      <svg class="cta-mark" viewBox="0 0 48 48" aria-hidden="true"><polygon points="24,6 40,15 24,24 8,15" fill="#12B76A"/><polygon points="8,15 24,24 24,42 8,33" fill="#0B7C49"/><polygon points="24,24 40,15 40,33 24,42" fill="#7DCBA3"/></svg>
+      <h2>Bir sonraki parçan<br />bir cümle uzağında.</h2>
+      <p>threeD şu an Windows için geliştiriliyor; kod macOS ve Linux'a taşınabilir.</p>
+      <a class="btn btn-primary magnetic" href="https://github.com/Aetiras/threed-landing" target="_blank" rel="noopener">Kaynağı GitHub'da incele
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+      </a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span class="brand small"><svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true"><polygon points="24,6 40,15 24,24 8,15" fill="#12B76A"/><polygon points="8,15 24,24 24,42 8,33" fill="#0B7C49"/><polygon points="24,24 40,15 40,33 24,42" fill="#7DCBA3"/></svg><span>three<b>D</b></span></span>
+    <span>Yapay zekâ destekli parametrik mekanik CAD · © 2026</span>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
