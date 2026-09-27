@@ -242,16 +242,17 @@
               <li><b>Sketch</b> Çizgi, dikdörtgen, daire, yay; ölçü ve kısıtlar; serbestlik derecesi canlı gösterilir.</li>
               <li><b>Parça</b> Extrude, cut, revolve, fillet, chamfer, delik (düz ve konik havşalı), doğrusal ve dairesel çoğaltma, parametreler.</li>
               <li><b>Montaj</b> Yedi mate türü, ISO bağlantı elemanları, malzeme listesi, çakışma kontrolü.</li>
-              <li><b>Teknik resim</b> Görünüşler, kesit ve tarama, ölçüler, antet; PDF ve DXF çıktısı.</li>
-              <li><b>Dosyalar</b> STEP ve IGES içe aktarma; STEP ve STL dışa aktarma.</li>
-              <li><b>Asistan</b> Codex ile, MCP üzerinden; önizleme ve tek adımda geri alma.</li>
+              <li><b>Teknik resim</b> Görünüşler, kesit ve tarama, ölçüler, antet; montajdaki her parça için ayrı pafta; PDF ve DXF çıktısı.</li>
+              <li><b>Dosyalar</b> STEP ve IGES içe aktarma, renkleriyle; DXF çizimleri tam tanımlı sketch olarak. STEP, IGES, 3MF, STL ve OBJ dışa aktarma; sketch'ten kesim için DXF.</li>
+              <li><b>Asistan</b> Codex ile, MCP üzerinden; önizleme, tek adımda geri alma, model ekranda adım adım oluşur.</li>
             </ul>
           </div>
           <div class="status-col">
             <h3><span class="st st-next" aria-hidden="true"></span>Sırada</h3>
             <ul>
-              <li><b>DXF'ten sketch'e</b> Eski 2B çizimlerini doğrudan sketch olarak içeri al.</li>
-              <li><b>DWG</b> DXF'in ardından.</li>
+              <li><b>SolidWorks'ten parametrik aktarma</b> Özellik ağacı ölçüleriyle birlikte gelsin, yalnız gövde değil.</li>
+              <li><b>Montaj teknik resmi</b> Balonlar ve paftada malzeme listesi.</li>
+              <li><b>DWG</b> Ücretsiz ODA File Converter ile; gerçek dosyalarla deneniyor.</li>
             </ul>
             <h3><span class="st st-info" aria-hidden="true"></span>Platform ve dil</h3>
             <ul>
@@ -294,7 +295,11 @@
           </details>
           <details>
             <summary>SolidWorks, Inventor ya da Fusion dosyalarımı açabilir miyim?</summary>
-            <p>O programlardan STEP ya da IGES olarak kaydettiğin dosyaları açabilirsin. Tek parçalı dosya bir gövde olarak gelir, üzerine delik, fillet ve sketch ekleyebilirsin. Çok parçalı dosya montaj olarak, bileşenler yerlerinde gelir.</p>
+            <p>O programlardan STEP ya da IGES olarak kaydettiğin dosyaları açabilirsin. Tek parçalı dosya bir gövde olarak gelir, üzerine delik, fillet ve sketch ekleyebilirsin. Çok parçalı dosya montaj olarak, bileşenler yerlerinde ve renkleriyle gelir. AutoCAD çizimlerini DXF olarak kaydedersen sketch olarak açılır; çok katmanlı bir paftada hangi katmanın alınacağını sen seçersin.</p>
+          </details>
+          <details>
+            <summary>3B yazıcıya ya da lazer kesime gönderebilir miyim?</summary>
+            <p>Evet. Parçayı ya da montajı 3MF veya STL olarak kaydedip dilimleyicide açabilirsin; 3MF renkleri ve parçaların yerleşimini de taşır. Lazer ya da su jeti kesimi için sketch'i DXF olarak dışa aktarırsın, yalnız kesilecek kontur yazılır.</p>
           </details>
           <details>
             <summary>Ne zaman kullanabilirim?</summary>
