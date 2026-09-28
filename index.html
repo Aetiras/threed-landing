@@ -73,7 +73,7 @@
             <div><dt>Ağaç</dt><dd>10 özellik · 27 yüz</dd></div>
             <div><dt>Yeniden hesap</dt><dd>38 ms</dd></div>
           </dl>
-          <p>Bu sayfadaki model, pafta ve dosyaların hepsi aynı threeD belgesinden dışa aktarıldı.</p>
+          <p>Bu sayfadaki model, pafta ve dosyaların hepsi aynı threeD belgesinden dışa aktarıldı. Aynı braket uygulamada örnek olarak da gelir.</p>
         </figcaption>
       </figure>
     </section>
@@ -240,19 +240,20 @@
             <h3><span class="st st-ok" aria-hidden="true"></span>Hazır</h3>
             <ul>
               <li><b>Sketch</b> Çizgi, dikdörtgen, daire, yay; ölçü ve kısıtlar; serbestlik derecesi canlı gösterilir. Ofset (tek ölçüyle sürülen, asıl çizimi izleyen kopya; köşeler keskin ya da yuvarlak) ve bir çizgiye göre aynalama.</li>
-              <li><b>Parça</b> Extrude, cut, revolve, sweep (yol boyunca, ekle ya da kes), fillet, chamfer, kabuk (içe ya da dışa, açık yüzlerle), delik (düz ve konik havşalı), doğrusal ve dairesel çoğaltma, aynalama (özellik ya da tüm gövde), parametreler.</li>
+              <li><b>Parça</b> Extrude, cut, revolve, sweep (yol boyunca, ekle ya da kes), loft (profiller arası), kalıp açısı (draft), kaburga, fillet, chamfer, kabuk (içe ya da dışa, açık yüzlerle), delik (düz ve konik havşalı), doğrusal ve dairesel çoğaltma, aynalama (özellik ya da tüm gövde), parametreler.</li>
               <li><b>Montaj</b> Yedi mate türü, ISO bağlantı elemanları, malzeme listesi, çakışma kontrolü.</li>
               <li><b>Teknik resim</b> Görünüşler, kesit ve tarama, ölçüler, antet; montajdaki her parça için ayrı pafta; PDF ve DXF çıktısı.</li>
               <li><b>Montaj teknik resmi</b> Montaj görünüşleri, parça numaralı balonlar (cıvata ve pul tek kılavuzda), montaj ölçüleri ve paftada malzeme listesi; balon ve tablo sürüklenerek yerleştirilir.</li>
               <li><b>Dosyalar</b> STEP ve IGES içe aktarma, renkleriyle; DXF çizimleri tam tanımlı sketch olarak. STEP, IGES, 3MF, STL ve OBJ dışa aktarma; sketch'ten kesim için DXF.</li>
               <li><b>İçe aktarılan parçada delik tanıma</b> STEP'ten gelen gövdedeki delikler (düz, kademeli, havşalı; boydan boya veya kör) ölçüleriyle delik özelliğine çevrilir. Çap, konum ve havşa sonradan değiştirilebilir. Önizlenir, tek adımda geri alınır; asistan da yapabilir.</li>
+              <li><b>Başlangıç</b> İlk açılışta örnek braketi (parça, pafta ve cıvatalı montaj) açabilir ya da sketch'ten paftaya beş adımlık ilk parça turuna başlayabilirsin. F1 ile kısayollar, fare kullanımı ve SolidWorks'ten gelenler için kavram karşılıkları; istersen SolidWorks fare düzeni.</li>
               <li><b>Asistan</b> threeD'nin kendi sunucusu üzerinden, ek hesap gerekmeden; önizleme, tek adımda geri alma, model ekranda adım adım oluşur.</li>
             </ul>
           </div>
           <div class="status-col">
             <h3><span class="st st-next" aria-hidden="true"></span>Sırada</h3>
             <ul>
-              <li><b>Modelleme araçları</b> Loft, kalıp açısı (draft), kaburga, spline ve inç birimi; ardından patlatılmış görünüş, alt montaj ve sac metal.</li>
+              <li><b>Modelleme araçları</b> Spline ve inç birimi; ardından patlatılmış görünüş, alt montaj ve sac metal.</li>
               <li><b>Tanımanın devamı</b> İçe aktarılan gövdede fillet ve pahlar, matkap uçlu kör delikler, dairesel ve doğrusal delik dizileri.</li>
               <li><b>DWG</b> Ücretsiz ODA File Converter ile; gerçek dosyalarla deneniyor.</li>
             </ul>
@@ -293,7 +294,11 @@
           </details>
           <details>
             <summary>Modelim bir sunucuya gidiyor mu?</summary>
-            <p>Belge bilgisayarındaki tek bir <code>.3d</code> dosyasıdır ve her değişiklik anında oraya yazılır. Asistanı kullandığında isteğin ve modelin ilgili kısmı threeD sunucusu üzerinden yapay zekâ sağlayıcısına gönderilir. Asistanla yaptığın sohbetler, sonra kaldığın yerden sürdürebilmen için threeD hesabında saklanır; istediğin sohbeti silebilirsin, 90 gün kullanılmayan sohbet kendiliğinden silinir. Asistanı kullanmazsan hiçbir şey dışarı çıkmaz.</p>
+            <p>Belge bilgisayarındaki tek bir <code>.3d</code> dosyasıdır ve her değişiklik anında oraya yazılır. Asistanı kullandığında isteğin ve modelin ilgili kısmı threeD sunucusu üzerinden yapay zekâ sağlayıcısına gönderilir. Asistanla yaptığın sohbetler, sonra kaldığın yerden sürdürebilmen için threeD hesabında saklanır; istediğin sohbeti silebilirsin, 90 gün kullanılmayan sohbet kendiliğinden silinir. Asistanı kullanmazsan hiçbir şey dışarı çıkmaz. Uygulama da bunu asistana ilk isteğini göndermeden önce bir kez gösterir.</p>
+          </details>
+          <details>
+            <summary>SolidWorks kullanıyorum, alışmam zor mu?</summary>
+            <p>Kavramlar aynı: özellik ağacı, ölçülü ve kısıtlı sketch, extrude, fillet, delik, montajda mate'ler, geri sarma çubuğu. Fare de tanıdık gelir; orta tuşla döndürür, Ctrl ile orta tuşta kaydırırsın, F modele sığdırır, Ctrl+1…8 (macOS'ta ⌘) standart görünüşleri açar. Yardım penceresinde (F1) SolidWorks'teki adların threeD'deki karşılıkları var; istersen SolidWorks fare düzenini de açabilirsin. İlk açılışta önerilen beş adımlık tur seni sketch'ten paftaya götürür.</p>
           </details>
           <details>
             <summary>SolidWorks, Inventor ya da Fusion dosyalarımı açabilir miyim?</summary>
