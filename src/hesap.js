@@ -226,6 +226,37 @@ function renderDevices(acc) {
   }
 }
 
+const usd = (c) => `$${(c / 100).toLocaleString("tr-TR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+function renderAi(acc) {
+  const ai = acc.ai;
+  $("#aiSec").hidden = !ai;
+  if (!ai) return;
+  const pct = ai.limit_cents > 0 ? Math.min(100, (ai.used_cents / ai.limit_cents) * 100) : 100;
+  $("#aiPct").textContent = `%${Math.round(pct)}`;
+  $("#aiUsed").textContent = `Bu ay ${usd(ai.used_cents)} / ${usd(ai.limit_cents)} kullanıldı`;
+  $("#aiRenew").textContent = pct >= 100 ? "Bu ayki hak doldu; ay başında yenilenir." : "Ay başında yenilenir.";
+  const bar = $("#aiBar");
+  bar.style.width = `${Math.max(pct, 1.5)}%`;
+  bar.className = pct >= 100 ? "full" : pct >= 80 ? "high" : "";
+  $("#aiConv").textContent = ai.conversations ? `${ai.conversations} kayıtlı sohbet` : "Kayıtlı sohbet yok";
+  $("#aiKeep").textContent = `Sohbetler sürdürebilmen için saklanır; ${ai.retention_days} gün kullanılmayan sohbet silinir.`;
+  $("#aiDelete").disabled = !ai.conversations;
+}
+
+$("#aiDelete").addEventListener("click", async (e) => {
+  const btn = e.currentTarget;
+  if (!confirm("Tüm asistan sohbetlerin kalıcı olarak silinsin mi? Bu geri alınamaz; belgelerine dokunulmaz.")) return;
+  btn.disabled = true;
+  try {
+    await api("/v1/web/ai/conversations/delete", { method: "POST" });
+    await loadAccount();
+  } catch (err) {
+    btn.disabled = false;
+    alert(err.message);
+  }
+});
+
 function renderHistory(acc) {
   const rows = acc.licenses;
   // Tek ve etkin lisans zaten üstte; geçmiş yalnız birden fazla kayıt varsa gösterilir.
@@ -259,6 +290,7 @@ async function loadAccount() {
   $("#acctSince").textContent = `Kayıt ${fmtDate(acc.created_at)}`;
   renderLicense(acc);
   renderDevices(acc);
+  renderAi(acc);
   renderHistory(acc);
   show("account");
 }
