@@ -38,7 +38,13 @@
   </header>
 
   <main class="wrap acct" id="icerik">
-    <p class="acct-loading" id="loading" aria-live="polite">Hesap bilgileri yükleniyor…</p>
+    <div class="acct-loading" id="loading" aria-live="polite">
+      <picture class="acct-loading-logo">
+        <source media="(prefers-reduced-motion: reduce)" srcset="brand/threeD-expo-still.svg" />
+        <img src="brand/threeD-expo.svg" width="285" height="70" alt="" />
+      </picture>
+      <span>Hesap bilgileri yükleniyor…</span>
+    </div>
 
     <!-- GİRİŞ / KAYIT -->
     <section class="auth" id="authView" hidden>
