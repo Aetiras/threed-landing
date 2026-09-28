@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>threeD hesabı</title>
+  <meta name="description" content="threeD hesabına gir ya da hesap oluştur; lisansını ve bilgisayarlarını buradan gör." />
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#f3f2ed" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0d0f0f" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <script>
+    // Tema, ilk boyamadan önce uygulanır (yanıp sönmeyi önler).
+    try { const t = localStorage.getItem("threed-theme"); if (t === "light" || t === "dark") document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body class="acct-page">
+  <a class="skip" href="#icerik">İçeriğe geç</a>
+
+  <header class="nav" id="nav">
+    <div class="wrap nav-in">
+      <a class="brand" href="./" aria-label="threeD ana sayfa">
+        <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true"><polygon points="24,6 40,15 24,24 8,15" fill="#12B76A"/><polygon points="8,15 24,24 24,42 8,33" fill="#0B7C49"/><polygon points="24,24 40,15 40,33 24,42" fill="#7DCBA3"/></svg>
+        <span>three<b>D</b></span>
+      </a>
+      <div class="nav-end">
+        <button class="theme-btn" id="themeBtn" type="button" aria-label="Tema: sistem">
+          <svg class="i-sys" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8M12 16v4"/></svg>
+          <svg class="i-light" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="i-dark" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+        </button>
+        <a class="btn btn-line" href="./">Ana sayfa</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap acct" id="icerik">
+    <p class="acct-loading" id="loading" aria-live="polite">Hesap bilgileri yükleniyor…</p>
+
+    <!-- GİRİŞ / KAYIT -->
+    <section class="auth" id="authView" hidden>
+      <div class="auth-card">
+        <div class="tb" aria-hidden="true"><span>A1</span><span>Hesap</span><span id="authTb">Giriş</span></div>
+        <div class="auth-tabs" role="tablist" aria-label="Hesap">
+          <button type="button" role="tab" id="tabLogin" aria-selected="true" aria-controls="authForm">Giriş yap</button>
+          <button type="button" role="tab" id="tabRegister" aria-selected="false" aria-controls="authForm">Hesap oluştur</button>
+        </div>
+        <h1 id="authTitle">Hesabına gir</h1>
+        <p class="auth-lead" id="authLead">threeD uygulamasında kullandığın e-posta ve parolayla.</p>
+        <form class="form" id="authForm" novalidate>
+          <label class="field">
+            <span>E-posta</span>
+            <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required spellcheck="false" />
+          </label>
+          <label class="field">
+            <span>Parola</span>
+            <span class="pw">
+              <input id="password" name="password" type="password" autocomplete="current-password" required />
+              <button type="button" class="pw-toggle" data-for="password" aria-label="Parolayı göster">Göster</button>
+            </span>
+            <small class="hint" id="pwHint" hidden>En az 10 karakter.</small>
+          </label>
+          <p class="form-error" id="authError" role="alert" hidden></p>
+          <button class="btn btn-solid btn-wide" type="submit" id="authSubmit">Giriş yap</button>
+        </form>
+        <p class="fine auth-foot" id="authFoot">E-postayla parola sıfırlama henüz yok; unuttuysan erken erişim ekibinden yeni parola iste.</p>
+      </div>
+    </section>
+
+    <!-- HESAP -->
+    <section class="account" id="accountView" hidden>
+      <header class="acct-head">
+        <div>
+          <div class="tb" aria-hidden="true"><span>A1</span><span>Hesap</span><span id="acctSince"></span></div>
+          <h1 id="acctEmail"></h1>
+        </div>
+        <button class="btn btn-line" type="button" id="logoutBtn">Çıkış yap</button>
+      </header>
+
+      <!-- Lisans: pafta anteti gibi -->
+      <article class="lic" id="licCard" aria-labelledby="licTitle">
+        <div class="lic-top">
+          <p class="lic-state" id="licState"><span class="lic-dot" aria-hidden="true"></span><span id="licStateText"></span></p>
+          <h2 id="licTitle"></h2>
+          <p class="lic-note" id="licNote"></p>
+        </div>
+        <dl class="lic-grid" id="licGrid"></dl>
+      </article>
+
+      <section class="acct-sec" aria-labelledby="devTitle">
+        <div class="acct-sec-head">
+          <h2 id="devTitle">Bilgisayarlar</h2>
+          <p class="muted" id="devCount"></p>
+        </div>
+        <ul class="devices" id="devices"></ul>
+        <p class="fine">Bir bilgisayarı serbest bırakınca yuvası hemen boşalır ve başka bir bilgisayarda giriş yapabilirsin; oradaki threeD, internete bir sonraki bağlanışında oturumu kapatır.</p>
+      </section>
+
+      <section class="acct-sec" id="histSec" aria-labelledby="histTitle" hidden>
+        <div class="acct-sec-head"><h2 id="histTitle">Lisans geçmişi</h2></div>
+        <div class="table-wrap">
+          <table class="hist">
+            <thead><tr><th>Plan</th><th>Durum</th><th>Başlangıç</th><th>Bitiş</th><th>Cihaz</th></tr></thead>
+            <tbody id="histBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="acct-sec" aria-labelledby="pwTitle">
+        <details class="pw-box">
+          <summary id="pwTitle">Parolayı değiştir</summary>
+          <form class="form" id="pwForm" novalidate>
+            <label class="field">
+              <span>Mevcut parola</span>
+              <input id="curPw" type="password" autocomplete="current-password" required />
+            </label>
+            <label class="field">
+              <span>Yeni parola</span>
+              <input id="newPw" type="password" autocomplete="new-password" minlength="10" required />
+              <small class="hint">En az 10 karakter. Değişince diğer bilgisayarlardaki threeD yeniden giriş ister.</small>
+            </label>
+            <p class="form-error" id="pwError" role="alert" hidden></p>
+            <p class="form-ok" id="pwOk" role="status" hidden>Parolan değişti.</p>
+            <button class="btn btn-solid" type="submit">Parolayı değiştir</button>
+          </form>
+        </details>
+      </section>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-in">
+      <span class="brand small"><svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true"><polygon points="24,6 40,15 24,24 8,15" fill="#12B76A"/><polygon points="8,15 24,24 24,42 8,33" fill="#0B7C49"/><polygon points="24,24 40,15 40,33 24,42" fill="#7DCBA3"/></svg><span>three<b>D</b></span></span>
+      <span>Parametrik mekanik CAD · © 2026</span>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/hesap.js"></script>
+</body>
+</html>

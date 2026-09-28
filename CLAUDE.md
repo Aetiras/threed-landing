@@ -1,6 +1,6 @@
 # threed-landing — threeD tanıtım sayfası
 
-threeD masaüstü CAD uygulamasını (`../threed-client`) anlatan tek sayfalık Türkçe tanıtım sitesi.
+threeD masaüstü CAD uygulamasını (`../threed-client`) anlatan tek sayfalık Türkçe tanıtım sitesi ve hesap sayfası.
 Canlı: https://aetiras.github.io/threed-landing/
 
 ## Komutlar
@@ -22,13 +22,20 @@ Test ve lint yok; değişikliği `npm run build` ile ve tarayıcıda kontrol et:
   Sayfada kod bloğu gösterilmez; DSL yalnız SSS'te kodsuz anılır (`src/assets/braket.dsl` sadece `uret.py` içindir).
 - usecady.com'dan ilham alındı, ama ondan ayrışmak bilinçli: kehribar renk, revizyon kaydırıcısı ve sticky 01–05
   anlatımı kullanılmaz; kendi motiflerimiz antet şeridi (`.tb`), pafta ve özellik ağacı geri sarmasıdır.
-- Erken erişim **açık değil**: form devre dışı, her yerde "yakında" yazar. Kayıt açılınca form bağlanmalı.
+- Erken erişim **kayıt açık**: `#erken-erisim` ve nav hesap sayfasına götürür. Kayıt yalnız hesap açar; lisansı yönetici
+  `threed-backend` CLI'ı ile verir. İndirme bağlantısı henüz yok — sayfada indirme vaadi yazma.
 
 ## Yapı
 
 - `index.html` — içerik (`lang="tr"`): nav, hero, `#nasil` (oynatıcı), `#asistan`, `#montaj`, `#teknik-resim`,
   `#durum`, `#sss`, `#erken-erisim`. Baştaki satır içi betik temayı ilk boyamadan önce uygular.
-- `src/main.js` — tema düğmesi (sistem → açık → koyu, `localStorage: threed-theme`), **oynatıcı** (`CHAPTERS`),
+- `hesap.html` + `src/hesap.js` — **hesap sayfası**: giriş / kayıt / hesap görünümü (lisans, bilgisayarlar, lisans
+  geçmişi, parola değiştirme). `threed-backend`'in `/v1/web/*` uçlarını çağırır; sözleşme
+  `../threed-backend/docs/web-hesap.md`. Oturum belirteci `localStorage: threed-web-token`. API adresi
+  `VITE_API_BASE` (üretim varsayılanı `https://threed-license.codecore.tech`, `npm run dev` → `.env.development`).
+- `src/ortak.js` — iki sayfanın ortağı: tema düğmesi (sistem → açık → koyu, `localStorage: threed-theme`), nav çizgisi,
+  oturum açıksa nav'daki "Giriş yap" → "Hesabım".
+- `src/main.js` — **oynatıcı** (`CHAPTERS`),
   pafta katmanları, beliriş. Oynatıcı video gibidir: `render()` yalnız `t` (ms) ve moda (`ai` | `manual`) bağlıdır,
   bu yüzden zaman çizelgesi ileri-geri sarılabilir. Sohbet öğeleri `data-at="bölüm:oran"` ile zamanlanır.
 - `src/viewer.js` — Three.js STL görüntüleyici (`createViewer`, `loadPart`). `show()` sabit sahne (hero, montajda
@@ -61,6 +68,8 @@ Client'ta geometri, DSL ya da teknik resim değişirse varlıkları yeniden üre
 ## Yayın
 
 - `main`'e push → `.github/workflows/pages.yml` derleyip GitHub Pages'e yayınlar (`PAGES_BASE=/threed-landing/`).
-- `vite.config.js`: `base = process.env.PAGES_BASE || "/"`. JS'te varlıkları `import …?url` / `?raw` ile al;
+- `vite.config.js`: `base = process.env.PAGES_BASE || "/"`; iki giriş sayfası (`index.html`, `hesap.html`). JS'te varlıkları `import …?url` / `?raw` ile al;
   `index.html`'de `public/` dosyalarına göreli yol ver (`files/braket.pdf`), mutlak `/` alt yolda kırılır.
+- Hesap sayfası üretim backend'ine bağlıdır: backend'de `/v1/web/*` yayında değilse ya da `THREED_WEB_ORIGINS` sitenin
+  kökenini içermiyorsa sayfa "Sunucuya ulaşılamadı" der. Önce backend'i dağıt.
 - Uzak depo: `github.com/Aetiras/threed-landing`. Push yalnız kullanıcı isterse — push canlı siteyi günceller.

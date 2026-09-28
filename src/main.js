@@ -1,4 +1,5 @@
 import "./style.css";
+import { initChrome } from "./ortak.js";
 import { createViewer, loadPart } from "./viewer.js";
 import paftaSvg from "./assets/pafta.svg?raw";
 import govdeUrl from "./assets/models/step-govde.stl?url";
@@ -15,27 +16,7 @@ const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const clamp01 = (x) => Math.min(1, Math.max(0, x));
 const ease = (x) => (x < 0.5 ? 4 * x * x * x : 1 - (-2 * x + 2) ** 3 / 2);
 
-/* Tema: sistem → açık → koyu */
-const themeBtn = $("#themeBtn");
-const THEMES = ["system", "light", "dark"];
-const LABEL = { system: "Tema: sistem", light: "Tema: açık", dark: "Tema: koyu" };
-const current = () => document.documentElement.dataset.theme || "system";
-const setTheme = (t) => {
-  if (t === "system") delete document.documentElement.dataset.theme;
-  else document.documentElement.dataset.theme = t;
-  themeBtn.dataset.mode = t;
-  themeBtn.setAttribute("aria-label", LABEL[t]);
-  themeBtn.title = LABEL[t];
-  try { t === "system" ? localStorage.removeItem("threed-theme") : localStorage.setItem("threed-theme", t); } catch (e) {}
-};
-setTheme(current());
-themeBtn.addEventListener("click", () => setTheme(THEMES[(THEMES.indexOf(current()) + 1) % 3]));
-
-/* Nav çizgisi */
-const nav = $("#nav");
-const onScroll = () => nav.classList.toggle("scrolled", window.scrollY > 8);
-window.addEventListener("scroll", onScroll, { passive: true });
-onScroll();
+initChrome();
 
 /* ───── Oynatıcı: braketin kuruluşu ─────
    Her bölüm, threeD'den dışa aktarılmış gerçek bir ara durumu (STL) gösterir. Kareler yalnız zamana bağlıdır;
