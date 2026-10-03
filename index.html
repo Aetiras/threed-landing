@@ -28,12 +28,18 @@
         <span>three<b>D</b></span>
       </a>
       <nav class="nav-links" aria-label="Bölümler">
-        <a href="#nasil">Nasıl çalışır</a>
-        <a href="#asistan">Asistan</a>
-        <a href="#montaj">Montaj</a>
-        <a href="#teknik-resim">Teknik resim</a>
+        <a href="#nasil">Ürün</a>
+        <a href="ogren/">Öğren</a>
+        <a href="ornekler/">Örnekler</a>
+        <a href="#fiyatlar">Fiyatlar</a>
         <a href="#sss">SSS</a>
       </nav>
+      <details class="mobile-nav">
+        <summary>Menü</summary>
+        <nav aria-label="Mobil bölümler">
+          <a href="#nasil">Ürün</a><a href="ogren/">Öğren</a><a href="ornekler/">Örnekler</a><a href="#fiyatlar">Fiyatlar</a><a href="#sss">SSS</a>
+        </nav>
+      </details>
       <div class="nav-end">
         <button class="theme-btn" id="themeBtn" type="button" aria-label="Tema: sistem">
           <svg class="i-sys" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8M12 16v4"/></svg>
@@ -53,11 +59,10 @@
         <h1>Parçayı tarif et.<br />Özellik ağacı <em>senin</em> kalsın.</h1>
         <p class="lead">threeD, sketch'ten montaja ve teknik resme kadar bilgisayarında çalışan bir CAD uygulaması. Parçayı elle modelleyebilirsin; istersen ne istediğini yazarsın, asistan aynı adımları ağaca ekler. Her adım görünür, düzenlenebilir ve tek tıkla geri alınır.</p>
         <div class="hero-ctas">
-          <a class="btn btn-solid" href="#nasil">Bir parçanın yapılışını izle
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
-          </a>
-          <a class="btn btn-quiet" href="#erken-erisim">Erken erişim</a>
+          <a class="btn btn-solid" href="hesap.html?kayit" data-event="access_signup_click" data-item="hero">Erken erişim hesabı oluştur</a>
+          <a class="btn btn-quiet" href="#nasil" data-event="demo_open" data-item="braket">Bir parçanın yapılışını izle</a>
         </div>
+        <p class="hero-access-note">Hesap açmak ücretsiz. Uygulama erişimi, erken erişim lisansın tanımlandığında başlar.</p>
       </div>
 
       <figure class="hero-fig">
@@ -228,20 +233,29 @@
       </div>
     </section>
 
+    <!-- ÖĞREN: aynı gerçek örnekten rehberlere geçiş -->
+    <section class="section home-learning" aria-labelledby="learnTitle">
+      <div class="wrap content-feature">
+        <div><p class="content-label">threeD öğren</p><h2 id="learnTitle">Ölçüden modele.<br>Bir örnekle öğren.</h2></div>
+        <div><p>Parametrik tasarımın mantığını motor braketi üzerinde keşfet. Katı modeli, cıvatalı montajı ve paftayı incele; STEP ve STL dosyalarını kendi programında aç.</p><div class="home-learning-links"><a class="text-link" href="ogren/">Rehberlerle başla</a><a class="text-link" href="ornekler/motor-braketi/" data-event="example_open" data-item="motor-braketi">Braket örneğini incele</a></div></div>
+      </div>
+    </section>
+
     <!-- DURUM -->
     <section class="section" id="durum">
       <div class="wrap">
         <header class="sec-head">
-          <div class="tb" aria-hidden="true"><span>05</span><span>Bugünkü durum</span><span>Eylül 2026</span></div>
+          <div class="tb" aria-hidden="true"><span>05</span><span>Bugünkü durum</span><span>Ekim 2026</span></div>
           <h2>Neler hazır, neler sırada.</h2>
+          <p class="sec-lead">Aşağıdaki özellikler geliştirme sürümünü anlatır. Erken erişim paketinin kapsamı sürümüne göre değişebilir.</p>
         </header>
         <div class="status">
           <div class="status-col">
             <h3><span class="st st-ok" aria-hidden="true"></span>Hazır</h3>
             <ul>
-              <li><b>Sketch</b> Çizgi, dikdörtgen, daire, yay; ölçü ve kısıtlar; serbestlik derecesi canlı gösterilir. Ofset (tek ölçüyle sürülen, asıl çizimi izleyen kopya; köşeler keskin ya da yuvarlak) ve bir çizgiye göre aynalama.</li>
+              <li><b>Sketch</b> Çizgi, dikdörtgen, daire, yay ve spline; ölçü ve kısıtlar; serbestlik derecesi canlı gösterilir. Ofset ve bir çizgiye göre aynalama; mm ve inç birimi.</li>
               <li><b>Parça</b> Extrude, cut, revolve, sweep (yol boyunca, ekle ya da kes), loft (profiller arası), kalıp açısı (draft), kaburga, fillet, chamfer, kabuk (içe ya da dışa, açık yüzlerle), delik (düz ve konik havşalı), doğrusal ve dairesel çoğaltma, aynalama (özellik ya da tüm gövde), parametreler.</li>
-              <li><b>Montaj</b> Yedi mate türü, ISO bağlantı elemanları, malzeme listesi, çakışma kontrolü.</li>
+              <li><b>Montaj</b> Yedi mate türü, ISO bağlantı elemanları, malzeme listesi, çakışma kontrolü; alt montajlar ve patlatılmış görünüş.</li>
               <li><b>Teknik resim</b> Görünüşler, kesit ve tarama, ölçüler, antet; montajdaki her parça için ayrı pafta; PDF ve DXF çıktısı.</li>
               <li><b>Montaj teknik resmi</b> Montaj görünüşleri, parça numaralı balonlar (cıvata ve pul tek kılavuzda), montaj ölçüleri ve paftada malzeme listesi; balon ve tablo sürüklenerek yerleştirilir.</li>
               <li><b>Dosyalar</b> STEP ve IGES içe aktarma, renkleriyle; DXF çizimleri tam tanımlı sketch olarak. STEP, IGES, 3MF, STL ve OBJ dışa aktarma; sketch'ten kesim için DXF.</li>
@@ -253,17 +267,63 @@
           <div class="status-col">
             <h3><span class="st st-next" aria-hidden="true"></span>Sırada</h3>
             <ul>
-              <li><b>Modelleme araçları</b> Spline ve inç birimi; ardından patlatılmış görünüş, alt montaj ve sac metal.</li>
+              <li><b>Eğitim</b> Uygulama içinde tam eğitim ve aranabilir yardım merkezi hazırlanıyor.</li>
               <li><b>Tanımanın devamı</b> İçe aktarılan gövdede fillet ve pahlar, matkap uçlu kör delikler, dairesel ve doğrusal delik dizileri.</li>
               <li><b>DWG</b> Ücretsiz ODA File Converter ile; gerçek dosyalarla deneniyor.</li>
             </ul>
             <h3><span class="st st-info" aria-hidden="true"></span>Platform ve dil</h3>
             <ul>
-              <li><b>Windows</b> Kurulum paketi hazırlanıyor.</li>
+              <li><b>Windows</b> x64 beta paketi erken erişimde; otomatik güncelleme destekleniyor.</li>
               <li><b>macOS</b> Geliştirme sürümü çalışıyor; bu sayfadaki dosyalar orada üretildi.</li>
               <li><b>Arayüz</b> Türkçe; koyu ve açık tema.</li>
             </ul>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fiyatlar: aynı CAD, farklı aylık AI hakkı -->
+    <section class="section pricing" id="fiyatlar" aria-labelledby="pricingTitle">
+      <div class="wrap">
+        <div class="pricing-head">
+          <div>
+            <h2 id="pricingTitle">Aynı CAD.<br>İhtiyacın kadar asistan.</h2>
+            <p class="sec-lead">Bir parçayla başla ya da bütün gün modelle. Sana uygun aylık AI hakkını seç; tüm paketlerde threeD'nin modelleme, montaj ve teknik resim araçları seninle.</p>
+          </div>
+          <div class="pricing-common"><span class="pricing-common-dot" aria-hidden="true"></span><span>Her pakette tam CAD<br><small>2 bilgisayarda kullanım</small></span></div>
+        </div>
+        <div class="pricing-board">
+          <article class="pricing-plan" data-plan="pro">
+            <div class="pricing-plan-top"><h3>Pro</h3><span class="pricing-factor">1x</span></div>
+            <p class="pricing-for">Asistanı gerektiğinde yanında isteyenlere.</p>
+            <p class="pricing-price"><span data-price>$50</span><small>/ ay</small></p>
+            <a class="btn btn-line pricing-cta" href="hesap.html" aria-label="Pro için hesap oluştur">Hesap oluştur</a>
+            <div class="pricing-allowance"><span>Aylık AI hakkı</span><strong data-allowance>$10</strong></div>
+            <div class="pricing-meter" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <p class="pricing-detail">Fikirlerini dene, parçalarını tarif et, ölçüleri birlikte düzenle.</p>
+          </article>
+          <article class="pricing-plan pricing-plan-focus" data-plan="pro_5x">
+            <div class="pricing-plan-top"><h3>Pro <span>5x</span></h3><span class="pricing-factor">5x</span></div>
+            <p class="pricing-for">Asistanla her gün çalışanlara.</p>
+            <p class="pricing-price"><span data-price>$250</span><small>/ ay</small></p>
+            <a class="btn btn-solid pricing-cta" href="hesap.html" aria-label="Pro 5x için hesap oluştur">Hesap oluştur</a>
+            <div class="pricing-allowance"><span>Aylık AI hakkı</span><strong data-allowance>$50</strong></div>
+            <div class="pricing-meter" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div>
+            <p class="pricing-detail">Daha fazla tasarım denemesi, daha uzun sohbetler, daha çok AI düzenlemesi.</p>
+          </article>
+          <article class="pricing-plan" data-plan="pro_10x">
+            <div class="pricing-plan-top"><h3>Pro <span>10x</span></h3><span class="pricing-factor">10x</span></div>
+            <p class="pricing-for">Yoğun tasarım günleri için daha geniş hak.</p>
+            <p class="pricing-price"><span data-price>$500</span><small>/ ay</small></p>
+            <a class="btn btn-line pricing-cta" href="hesap.html" aria-label="Pro 10x için hesap oluştur">Hesap oluştur</a>
+            <div class="pricing-allowance"><span>Aylık AI hakkı</span><strong data-allowance>$100</strong></div>
+            <div class="pricing-meter" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+            <p class="pricing-detail">Asistanı iş akışının merkezine koy; aynı özelliklerle Pro'nun 10 katı AI hakkını kullan.</p>
+          </article>
+        </div>
+        <div class="pricing-notes">
+          <p>AI hakkın model kullanım maliyetine göre azalır. Her ayın 1'inde, 00.00 UTC'de yenilenir; kullanılmayan hak sonraki aya devretmez.</p>
+          <p>Hesap açmak ücretsiz. Erken erişimde lisanslar yönetici tarafından tanımlanır; henüz çevrimiçi ödeme alınmaz.</p>
         </div>
       </div>
     </section>
@@ -329,7 +389,7 @@
             <div>
               <p class="soon"><span class="soon-dot on" aria-hidden="true"></span>Kayıt açık</p>
               <h2>İlk sürümü birlikte deneyelim.</h2>
-              <p class="sec-lead">Hesabını oluştur. Erken erişim lisansın tanımlandığında hesap sayfanda görünür; threeD'yi aynı e-posta ve parolayla açarsın.</p>
+              <p class="sec-lead">Hesabını oluştur. Uygulama erişimi lisansın tanımlandığında başlar; planını ve erişim durumunu hesap sayfanda görürsün. Beklerken rehberleri okuyabilir ve örnek dosyaları inceleyebilirsin.</p>
             </div>
             <div class="access-form">
               <ol class="access-steps">
@@ -338,7 +398,7 @@
                 <li><b>Uygulamada giriş yap</b><span>Aynı hesapla; bilgisayarlarını hesap sayfandan yönetirsin.</span></li>
               </ol>
               <div class="access-row">
-                <a class="btn btn-solid" href="hesap.html?kayit">Hesap oluştur</a>
+                <a class="btn btn-solid" href="hesap.html?kayit" data-event="access_signup_click" data-item="access">Hesap oluştur</a>
                 <a class="btn btn-line btn-tall" href="hesap.html">Giriş yap</a>
               </div>
             </div>
@@ -352,6 +412,7 @@
     <div class="wrap footer-in">
       <span class="brand small"><svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true"><polygon points="24,6 40,15 24,24 8,15" fill="#12B76A"/><polygon points="8,15 24,24 24,42 8,33" fill="#0B7C49"/><polygon points="24,24 40,15 40,33 24,42" fill="#7DCBA3"/></svg><span>three<b>D</b></span></span>
       <span>Parametrik mekanik CAD · © 2026</span>
+      <nav class="footer-links" aria-label="Alt bağlantılar"><a href="ogren/">Öğren</a><a href="ornekler/">Örnekler</a><a href="#erken-erisim">Erken erişim</a></nav>
       <span class="fine">Sayfadaki model, pafta ve dosyalar threeD'nin geliştirme sürümünde üretildi (Apple M3, macOS).</span>
       <span class="tm">SOLIDWORKS, Dassault Systèmes'in; AutoCAD, Inventor ve Fusion, Autodesk'in tescilli markalarıdır. threeD bu şirketlerle bağlantılı değildir; adlar yalnız dosya uyumluluğunu anlatmak için anılır.</span>
     </div>

@@ -171,6 +171,53 @@ code { font-size: 0.88em; }
 
 /* Bölümler */
 .section { padding: 104px 0; border-top: 1px solid var(--line); }
+
+/* Fiyatlar: tek karşılaştırma yüzeyi, ortak CAD araçları ve ölçeklenen AI hakkı. */
+.pricing-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 48px; margin-bottom: 42px; }
+.pricing-head h2 { font-size: clamp(38px, 4.8vw, 60px); line-height: 1.04; }
+.pricing-head .sec-lead { max-width: 650px; margin-top: 24px; }
+.pricing-common { flex-shrink: 0; display: flex; align-items: flex-start; gap: 10px; padding-bottom: 6px; font-size: 14px; font-weight: 500; line-height: 1.5; }
+.pricing-common small { color: var(--ink-2); font-weight: 400; font-size: 12px; }
+.pricing-common-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; margin-top: 7px; }
+.pricing-board { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1px solid var(--line-2); border-radius: 12px; overflow: hidden; background: var(--surface); }
+.pricing-plan { position: relative; padding: 32px 30px 30px; min-width: 0; }
+.pricing-plan + .pricing-plan { border-left: 1px solid var(--line-2); }
+.pricing-plan-focus { background: var(--accent-soft); }
+.pricing-plan-focus::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--accent); }
+.pricing-plan-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.pricing-plan h3 { font-size: 27px; letter-spacing: -0.03em; }
+.pricing-plan h3 span { font-weight: 400; }
+.pricing-factor { font-size: 14px; font-weight: 500; color: var(--ink-2); padding: 4px 8px; border: 1px solid var(--line-2); border-radius: 5px; }
+.pricing-for { margin-top: 15px; min-height: 48px; max-width: 30ch; font-size: 14px; line-height: 1.6; color: var(--ink-2); }
+.pricing-price { display: flex; align-items: baseline; gap: 8px; margin: 26px 0 24px; font-size: clamp(42px, 4vw, 52px); line-height: 1; font-weight: 600; letter-spacing: -0.045em; font-variant-numeric: tabular-nums; }
+.pricing-price small { font-size: 14px; font-weight: 400; letter-spacing: 0; color: var(--ink-2); }
+.pricing-cta { width: 100%; height: 42px; justify-content: center; }
+.pricing-plan-focus .pricing-cta { background: var(--accent); color: var(--on-accent); }
+.pricing-plan-focus .pricing-cta:hover { background: var(--accent-2); }
+.pricing-allowance { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-top: 36px; font-size: 13px; color: var(--ink-2); }
+.pricing-allowance strong { font-size: 24px; font-weight: 600; color: var(--ink); letter-spacing: -0.02em; }
+.pricing-meter { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; margin-top: 12px; }
+.pricing-meter i { height: 7px; background: var(--line); border-radius: 1px; }
+.pricing-meter .on { background: var(--accent); }
+.pricing-detail { margin-top: 20px; max-width: 33ch; color: var(--ink-2); font-size: 13px; line-height: 1.65; }
+.pricing-notes { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; margin-top: 24px; color: var(--ink-2); font-size: 12px; line-height: 1.65; }
+@media (max-width: 850px) {
+  .pricing-head { gap: 24px; }
+  .pricing-common { display: none; }
+  .pricing-plan { padding: 26px 20px; }
+  .pricing-plan h3 { font-size: 24px; }
+}
+@media (max-width: 640px) {
+  .pricing-head { margin-bottom: 30px; }
+  .pricing-board { grid-template-columns: 1fr; }
+  .pricing-plan { padding: 28px 24px; }
+  .pricing-plan + .pricing-plan { border-left: 0; border-top: 1px solid var(--line-2); }
+  .pricing-for { min-height: 0; max-width: none; }
+  .pricing-price { margin: 22px 0; }
+  .pricing-allowance { margin-top: 28px; }
+  .pricing-detail { max-width: none; }
+  .pricing-notes { grid-template-columns: 1fr; gap: 12px; }
+}
 .sec-head { max-width: 660px; margin-bottom: 44px; }
 .sec-head-wide { max-width: 760px; }
 .sec-head h2 { font-size: clamp(32px, 4vw, 48px); margin-top: 22px; }

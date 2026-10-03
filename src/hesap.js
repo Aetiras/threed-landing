@@ -1,6 +1,8 @@
 /* Hesap sayfası: giriş, kayıt, lisans ve cihaz bilgisi. Sözleşme: threed-backend/docs/web-hesap.md */
 import "./style.css";
+import "./measurement.css";
 import { TOKEN_KEY, initChrome } from "./ortak.js";
+import { MEASUREMENT_ENABLED, signupMeasurement, trackSiteEvent } from "./measurement.js";
 
 initChrome();
 
@@ -55,7 +57,7 @@ function platformName(p) {
   return archName ? `${osName} · ${archName}` : osName;
 }
 
-const planName = (p) => (p ? p.charAt(0).toLocaleUpperCase("tr-TR") + p.slice(1) : "—");
+const planName = (p) => ({ pro: "Pro", pro_5x: "Pro 5x", pro_10x: "Pro 10x", beta: "Beta" }[p] || (p ? p.charAt(0).toLocaleUpperCase("tr-TR") + p.slice(1) : "—"));
 const STATUS = { active: "Etkin", scheduled: "Başlamadı", expired: "Süresi doldu", revoked: "İptal edildi" };
 
 function el(tag, attrs = {}, ...kids) {
@@ -99,6 +101,7 @@ function setMode(m) {
   $("#authSubmit").textContent = c.submit;
   $("#password").autocomplete = c.pwAuto;
   $("#pwHint").hidden = m !== "register";
+  $("#signupMeasurementChoice").hidden = !MEASUREMENT_ENABLED || m !== "register";
   $("#authFoot").hidden = m !== "login";
   $("#authError").hidden = true;
   history.replaceState(null, "", location.pathname + (m === "register" ? "?kayit" : ""));
@@ -138,13 +141,22 @@ $("#authForm").addEventListener("submit", async (e) => {
   if (mode === "register" && [...password].length < 10) return formError("#authError", "Parola en az 10 karakter olmalı.");
   formError("#authError", "");
   const btn = $("#authSubmit");
+  const submittedMode = mode;
   btn.disabled = true;
   btn.textContent = COPY[mode].busy;
   try {
-    const { token } = await api(mode === "register" ? "/v1/web/register" : "/v1/web/login", {
-      method: "POST", body: { email, password }, auth: false,
+    const body = { email, password };
+    if (MEASUREMENT_ENABLED && submittedMode === "register") {
+      let storage; try { storage = window.sessionStorage; } catch { storage = { getItem: () => null, setItem: () => {} }; }
+      body.measurement = signupMeasurement($("#signupMeasurement").checked, storage, location.search);
+    }
+    const result = await api(submittedMode === "register" ? "/v1/web/register" : "/v1/web/login", {
+      method: "POST", body, auth: false,
     });
+    const token = result?.token;
+    if (typeof token !== "string" || !token.trim() || token.length > 128) throw new ApiError("invalid_response", "Hesap yanıtı doğrulanamadı. Tekrar dene.");
     setToken(token);
+    if (submittedMode === "register") trackSiteEvent("registration_completed", "account");
     $("#password").value = "";
     await loadAccount();
   } catch (err) {
@@ -235,7 +247,12 @@ function renderAi(acc) {
   const pct = ai.limit_cents > 0 ? Math.min(100, (ai.used_cents / ai.limit_cents) * 100) : 100;
   $("#aiPct").textContent = `%${Math.round(pct)}`;
   $("#aiUsed").textContent = `Bu ay ${usd(ai.used_cents)} / ${usd(ai.limit_cents)} kullanıldı`;
-  $("#aiRenew").textContent = pct >= 100 ? "Bu ayki hak doldu; ay başında yenilenir." : "Ay başında yenilenir.";
+  const renew = Number.isFinite(ai.reset_at)
+    ? `${new Date(ai.reset_at * 1000).toLocaleDateString("tr-TR", { day: "numeric", month: "long", timeZone: "UTC" })} tarihinde yenilenir (UTC).`
+    : "Ay başında yenilenir (UTC).";
+  $("#aiRenew").textContent = ai.unsettled_calls > 0
+    ? "Önceki AI çağrısının kullanımı doğrulanıyor; yeni istekler geçici olarak durduruldu."
+    : (ai.exceeded || pct >= 100 ? `Bu ayki AI hakkın doldu. ${renew}` : renew);
   const bar = $("#aiBar");
   bar.style.width = `${Math.max(pct, 1.5)}%`;
   bar.className = pct >= 100 ? "full" : pct >= 80 ? "high" : "";
@@ -275,6 +292,7 @@ function renderHistory(acc) {
   }
 }
 
+const seenLicenses = new Set();
 async function loadAccount() {
   if (!getToken()) return showAuth();
   let acc;
@@ -292,8 +310,29 @@ async function loadAccount() {
   renderDevices(acc);
   renderAi(acc);
   renderHistory(acc);
+  $("#measurementSection").hidden = !MEASUREMENT_ENABLED || typeof acc.measurement?.enabled !== "boolean";
+  $("#accountMeasurement").checked = acc.measurement?.enabled === true;
+  if (acc.license && !seenLicenses.has(acc.license.id)) {
+    seenLicenses.add(acc.license.id);
+    trackSiteEvent("web_license_seen", "account");
+  }
   show("account");
 }
+
+$("#accountMeasurement").addEventListener("change", async (event) => {
+  const input = event.currentTarget;
+  const enabled = input.checked;
+  input.disabled = true;
+  formError("#measurementError", "");
+  $("#measurementStatus").hidden = true;
+  try {
+    const result = await api("/v1/web/measurement", { method: "POST", body: { enabled } });
+    input.checked = result.enabled === true;
+    $("#measurementStatus").textContent = input.checked ? "Kullanım bilgisi paylaşımı açıldı." : "Yeni kullanım bildirimleri kapatıldı.";
+    $("#measurementStatus").hidden = false;
+  } catch (error) { input.checked = !enabled; formError("#measurementError", error.message); }
+  finally { input.disabled = false; }
+});
 
 $("#logoutBtn").addEventListener("click", async () => {
   try { await api("/v1/web/logout", { method: "POST" }); } catch (e) {}

@@ -1,0 +1,6 @@
+/* Hesabın isteğe bağlı kullanım tercihi. Form alanı gizliyken eski kayıt deneyimi korunur. */
+.measurement-choice { display: flex; align-items: flex-start; gap: 12px; color: var(--ink-2); font-size: 14px; line-height: 1.5; cursor: pointer; }
+.measurement-choice input { width: 17px; height: 17px; margin: 3px 0 0; flex-shrink: 0; accent-color: var(--accent); }
+.measurement-choice b { display: block; color: var(--ink); font-weight: 500; }
+.measurement-choice small { display: block; font-size: 12px; margin-top: 5px; }
+.measurement-choice input:disabled { cursor: wait; }

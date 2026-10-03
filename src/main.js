@@ -1,5 +1,8 @@
 import "./style.css";
+import "./learning.css";
 import { initChrome } from "./ortak.js";
+import { initNavigation } from "./navigation.js";
+import { initPricing } from "./pricing.js";
 import { createViewer, loadPart } from "./viewer.js";
 import paftaSvg from "./assets/pafta.svg?raw";
 import govdeUrl from "./assets/models/step-govde.stl?url";
@@ -17,6 +20,8 @@ const clamp01 = (x) => Math.min(1, Math.max(0, x));
 const ease = (x) => (x < 0.5 ? 4 * x * x * x : 1 - (-2 * x + 2) ** 3 / 2);
 
 initChrome();
+initNavigation();
+initPricing();
 
 /* ───── Oynatıcı: braketin kuruluşu ─────
    Her bölüm, threeD'den dışa aktarılmış gerçek bir ara durumu (STL) gösterir. Kareler yalnız zamana bağlıdır;

@@ -19,10 +19,15 @@ Açık/koyu tema (sistem tercihi ya da düğme). `prefers-reduced-motion` açık
 
 ## Geliştirme
 
+Öğren merkezi, rehberler ve örnek sayfaları `src/content/pages.js` kaynağından statik HTML olarak üretilir.
+İçerik, tutorial eşlemesi, paylaşım metaverileri ve ölçüm olayları: [uygulama notu](docs/gorunurluk-ve-icerik.md).
+
 ```sh
 npm install
 npm run dev      # http://localhost:5173
 npm run build    # dist/
+npm run check:site       # derlenmiş bağlantılar, metadata ve ölçüm sözleşmesi
+npm run check:learning   # yerel sibling client tutorial kataloğuyla eşleme
 ```
 
 Varlıkları client'tan yeniden üretmek için: `scripts/uret.py` (ayrıntı `CLAUDE.md`'de).

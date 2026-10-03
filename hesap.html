@@ -69,6 +69,10 @@
             </span>
             <small class="hint" id="pwHint" hidden>En az 10 karakter.</small>
           </label>
+          <label class="measurement-choice" id="signupMeasurementChoice" hidden>
+            <input id="signupMeasurement" type="checkbox" />
+            <span><b>İlk kullanım bilgilerini paylaş</b><small>İsteğe bağlı. Kampanya kaynağı ve ilk modelin kaydedilmesi/dışa aktarılması ölçülür. Model, dosya adı ve içerikleri paylaşılmaz.</small></span>
+          </label>
           <p class="form-error" id="authError" role="alert" hidden></p>
           <button class="btn btn-solid btn-wide" type="submit" id="authSubmit">Giriş yap</button>
         </form>
@@ -95,6 +99,16 @@
         </div>
         <dl class="lic-grid" id="licGrid"></dl>
       </article>
+
+      <section class="acct-sec" id="measurementSection" aria-labelledby="measurementTitle" hidden>
+        <div class="acct-sec-head"><h2 id="measurementTitle">Kullanım bilgisi paylaşımı</h2></div>
+        <label class="measurement-choice">
+          <input id="accountMeasurement" type="checkbox" />
+          <span><b>Ürünün ilk kullanım adımlarını paylaş</b><small>Uygulamanın açılması, ilk modelin kaydedilmesi ve dışa aktarılması threeD sunucusuna bildirilir. Model, dosya adı, çizim ve sohbet içerikleri gönderilmez. Kapattığında yeni bildirim alınmaz.</small></span>
+        </label>
+        <p id="measurementError" class="form-error" role="alert" hidden></p>
+        <p id="measurementStatus" class="form-ok" role="status" hidden></p>
+      </section>
 
       <section class="acct-sec" aria-labelledby="devTitle">
         <div class="acct-sec-head">

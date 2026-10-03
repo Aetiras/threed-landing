@@ -1,4 +1,5 @@
 /* Tanıtım sayfası ile hesap sayfasının ortak parçaları: tema düğmesi, nav çizgisi, hesap bağlantısı. */
+import { initMeasurement } from "./measurement.js";
 
 const $ = (s) => document.querySelector(s);
 
@@ -14,6 +15,7 @@ const THEMES = ["system", "light", "dark"];
 const LABEL = { system: "Tema: sistem", light: "Tema: açık", dark: "Tema: koyu" };
 
 export function initChrome() {
+  initMeasurement();
   const themeBtn = $("#themeBtn");
   const current = () => document.documentElement.dataset.theme || "system";
   const setTheme = (t) => {

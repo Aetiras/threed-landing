@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import { storedCampaign, signupMeasurement, measurementDetail } from '../src/measurement.js';
+const values = new Map();
+const storage = { getItem: (key) => values.get(key) || null, setItem: (key, value) => values.set(key, value) };
+const first = '?utm_source=linkedin&utm_medium=social&utm_campaign=pilot&token=private';
+assert.deepEqual(storedCampaign(storage, first), { source: 'linkedin', medium: 'social', campaign: 'pilot' });
+assert.deepEqual(storedCampaign(storage, '?kayit'), { source: 'linkedin', medium: 'social', campaign: 'pilot' });
+assert.deepEqual(storedCampaign(storage, '?utm_source=youtube'), { source: 'linkedin', medium: 'social', campaign: 'pilot' });
+assert.deepEqual(signupMeasurement(false, storage, first), { enabled: false, attribution: {} });
+assert.deepEqual(signupMeasurement(true, storage, first).attribution, { source: 'linkedin', medium: 'social', campaign: 'pilot' });
+const blocked = { getItem() { throw new Error('storage disabled'); }, setItem() { throw new Error('storage disabled'); } };
+assert.deepEqual(storedCampaign(blocked, first), { source: 'linkedin', medium: 'social', campaign: 'pilot' });
+values.set('threed-campaign-v1', JSON.stringify({ source: 'user@example.com', token: 'private', document: '/private.3d' }));
+assert.deepEqual(storedCampaign(storage, '?kayit'), {});
+assert.deepEqual(measurementDetail('registration_completed', '/hesap.html', 'account'), { name: 'registration_completed', page: 'account', item: 'account' });
+assert.equal(measurementDetail('register_failed', '/hesap.html', 'account'), null);
+console.log('İlk kaynak, sayfalar arası aktarım, isteğe bağlı paylaşım, engelli depolama ve başarılı kayıt olay sözleşmesi doğrulandı.');

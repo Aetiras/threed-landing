@@ -2,3 +2,13 @@ node_modules
 dist
 .vercel
 .DS_Store
+
+# src/content/pages.js ve scripts/site-content.mjs tarafından üretilen sayfalar
+/ogren/index.html
+/ornekler/index.html
+/ornekler/motor-braketi/index.html
+/rehberler/parametrik-cad/index.html
+/rehberler/step-stl/index.html
+/docs/qa/*.png
+/docs/qa/*.jpg
+/.qa/

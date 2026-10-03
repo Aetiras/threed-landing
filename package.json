@@ -6,6 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "check:site": "node scripts/check-site.mjs",
+    "check:learning": "node scripts/check-learning.mjs",
+    "check:measurement": "node scripts/check-measurement.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
